@@ -1,0 +1,21 @@
+
+services:
+  desktop-container:
+    # Xây dựng image từ Dockerfile trong thư mục hiện tại (.)
+    build: .
+    # Đặt tên cho image sau khi xây dựng
+    image: custom-ubuntu-desktop
+    # Đặt tên cho container khi nó chạy để dễ quản lý
+    container_name: my-remote-desktop
+
+    # Ánh xạ cổng (port mapping): "cổng_máy_thật:cổng_container"
+    ports:
+      # Ánh xạ cổng 2222 của máy thật vào cổng 22 (SSH) của container
+      # Dùng 2222 để tránh xung đột nếu máy thật cũng đang dùng cổng 22
+      - "2222:22"
+      # Ánh xạ cổng 5901 của máy thật vào cổng 5901 (VNC) của container
+      - "5901:5901"
+
+    # Giữ cho container chạy và cho phép tương tác
+    stdin_open: true
+    tty: true
